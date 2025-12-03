@@ -28,7 +28,9 @@ calc_coordinates <- function(N, M, limits, segment = 0.5) {
       # theta_right is the right-hand end of the arc
       theta_right <- pi - theta_narrow
       theta <- seq( theta_left, theta_right,
-                   len = counts[i])
+                   len = counts[i]+ (segment == 1))
+      # generate one extra point then drop last when full circle
+      if (segment == 1) theta <- head(theta, -1) 
       # subtract the seats already plotted from N
       # N becomes 'seats left to calculate'
       N <<- N - counts[i]
